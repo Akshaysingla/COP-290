@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>UserUI_1</class>
+ <widget class="QMainWindow" name="UserUI_1">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1405</width>
+    <height>898</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MyDropBox</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>30</y>
+      <width>511</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:600; color:#458981;&quot;&gt;TextLabel&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>970</x>
+      <y>30</y>
+      <width>111</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="whatsThis">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Sync All&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../Icons/sync-icon.png</normaloff>../../Icons/sync-icon.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>1230</x>
+      <y>30</y>
+      <width>101</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../Icons/Logout-01.png</normaloff>../../Icons/Logout-01.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QCommandLinkButton" name="commandLinkButton">
+    <property name="geometry">
+     <rect>
+      <x>840</x>
+      <y>60</y>
+      <width>91</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Read Me</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_20">
+    <property name="geometry">
+     <rect>
+      <x>1100</x>
+      <y>30</y>
+      <width>111</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>../../Icons/open.png</normaloff>../../Icons/open.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>100</width>
+      <height>100</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QTabWidget" name="tabWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>170</y>
+      <width>1301</width>
+      <height>711</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="tab_5">
+     <attribute name="title">
+      <string>Server</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton_13">
+      <property name="geometry">
+       <rect>
+        <x>1030</x>
+        <y>530</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Download Selected</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_19">
+      <property name="geometry">
+       <rect>
+        <x>1030</x>
+        <y>590</y>
+        <width>151</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>View Shared Folder</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_16">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>500</y>
+        <width>121</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Transfer</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_17">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>550</y>
+        <width>121</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Collaborate</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_18">
+      <property name="geometry">
+       <rect>
+        <x>670</x>
+        <y>600</y>
+        <width>121</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Unshare</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>660</x>
+        <y>470</y>
+        <width>191</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Change Priveledges</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_7">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>570</y>
+        <width>191</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Delete Selected File</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_9">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>500</y>
+        <width>191</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Share File</string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="SharedList1">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>20</y>
+        <width>331</width>
+        <height>451</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::SingleSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>109</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Filename</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Shared With</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Permission</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="SharedList2">
+      <property name="geometry">
+       <rect>
+        <x>930</x>
+        <y>20</y>
+        <width>331</width>
+        <height>451</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>109</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Filename</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Shared By</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Permission</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QTableWidget" name="ServerList">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>20</y>
+        <width>401</width>
+        <height>461</height>
+       </rect>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <property name="wordWrap">
+       <bool>true</bool>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>199</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Filename</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Path</string>
+       </property>
+      </column>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_6">
+     <attribute name="title">
+      <string>Local Storage</string>
+     </attribute>
+     <widget class="QTreeView" name="treeView">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>60</y>
+        <width>531</width>
+        <height>391</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_10">
+      <property name="geometry">
+       <rect>
+        <x>200</x>
+        <y>490</y>
+        <width>161</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Open DropBox</string>
+      </property>
+     </widget>
+     <widget class="QListView" name="listView_2">
+      <property name="geometry">
+       <rect>
+        <x>800</x>
+        <y>40</y>
+        <width>411</width>
+        <height>331</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>480</y>
+        <width>181</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Upload Selected Files</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>1020</x>
+        <y>520</y>
+        <width>181</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Upload Files In a Folder</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>820</x>
+        <y>390</y>
+        <width>181</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse And Select Files</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_21">
+      <property name="geometry">
+       <rect>
+        <x>1020</x>
+        <y>390</y>
+        <width>181</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Deselect Files</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_8">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>490</y>
+        <width>161</width>
+        <height>71</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Sync All</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>1020</x>
+        <y>480</y>
+        <width>181</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Folder  :</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="lineEdit_2"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1405</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMyDropBOx">
+    <property name="title">
+     <string>MyDropBOx</string>
+    </property>
+   </widget>
+   <addaction name="menuMyDropBOx"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

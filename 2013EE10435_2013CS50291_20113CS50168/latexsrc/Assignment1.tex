@@ -1,0 +1,216 @@
+\documentclass[a4paper]{article}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{graphicx}
+
+\title{COP290 : Design Practices \\ Assignment 1 : Screen Saver}
+
+\begin{document}
+\title{COP290 : Design Practices \\ Assignment 1 : Screen Saver}
+\maketitle
+
+\begin{center}
+Nikhil Chaturvedi : 2013CS50291 \\
+Akshay Singla : 2013EE10435\\
+Rishabh Sanghi : 2013CS50168 \\ 
+\end{center}
+
+\begin{abstract}
+A simple C++ implementation of a screen saver displaying N balls colliding perfectly with each other and having perfect reflection with the walls.
+\end{abstract}
+
+
+
+\pagebreak
+
+\section{Overall Design}
+The implementation makes use of threads to represent and control balls. Every ball is represented by a single thread which contains information about its co-ordinates, velocity and radius. Collisions are detected using event based simulation. This is done by having a priority queue which is organized by the numer of iterations for the next collision between any 2 balls. The programme allows the user to choose the number of balls, each having a random initial velocity and radius. The user is also allowed to change the speed of individual balls during runtime. The threads communicate with each through message passing, making it one-to-one communication.
+
+\section{Sub Components}
+\subsection{GUI}
+The OpenGL library has been used for graphics. \\
+The SDL Library has been used to load images for the textures.\\
+\begin{description}
+
+\item[$\ast$ ] The program has 4 predefined background accesible to the user. 
+\item[$\ast$ ] The program has 4 predefined box textures accesible to the user. 
+\item[$\ast$ ] The box is made to look like glass and is translucent allowing user to see the balls inside.
+\item[$\ast$ ] The balls are given random colors initally.
+\item[$\ast$ ] The balls appear red when they collide with another ball or wall and the red color fades out to the original color.
+\item[$\ast$ ] Lighting and Material properties have been used for the balls to give them a 3D effect.
+\item[$\ast$ ] A wire sphere is formed around the ball whenever a ball is selected to change its speed.
+\end{description}
+\subsection{User Interface}
+The GLUI library has been used for the User Interface.\\ 
+The balls are assigned random colours at the start of the program. \\
+The features accessible to the user are :
+
+\begin{description}
+\item[$\ast$ ] \textbf{Number Of Balls : }The program opens up with a screen asking for the number of balls and the program readjusts the radius of the balls accordingly.
+\item[$\ast$ ] \textbf{2D/3D : }The user can toggle between a 3D Box(by default) and a 2D space.
+\item[$\ast$ ] \textbf{FullScreen Mode : }The user can hide the User Interface controls by simply selecting this features.
+\item[$\ast$ ] \textbf{Variable Speed : }The user would be able to choose and vary the speed of a ball from a control in the GUI only.
+\item[$\ast$ ] \textbf{Pause And Resume : }The user can also pause the screensaver at any time and resume it from that instant only.
+\item[$\ast$ ] \textbf{Zoom In : } While in 3D, the user can zoom in and zoom back out of the screensaver at any time with a simple slider.
+\item[$\ast$ ] \textbf{Rotate : }While in 3D mode, the user can rotate the cube easily.
+\item[$\ast$ ] \textbf{Change Background : } The user can change the background of the screensaver from a set of pre-defined images.
+\item[$\ast$ ] \textbf{Box Textures : }While in 3D mode, the user can change the texture of the glass box from a set of pre-defined textures.
+
+\end{description}
+
+
+\subsection{Physics}
+
+Physics involves 3-D perfect elastic collisions of balls having the same density and perfect reflection with the walls. \\
+
+The distance of the centre with the wall is to determine the event of a wall-ball collision\\
+The number of iterations between a collision of 2 balls is used to determine the event of a ball-ball collision.\\
+
+
+
+\textbf{(1) Ball-Wall Collision : }\\
+\textbf{Condition : }Distance of centre of ball from the wall $<=$ Radius of Ball.\\
+If a ball collides with a wall, the velocity component perpendicular to the wall is reversed.
+\begin{equation}
+V_{\perp_{ final}} = - V_{\perp_{inital}} 
+\end{equation}
+
+\textbf{(2) Priority Queue  : }\\
+\textbf{Condition : }Distance between centre of balls $<=$ Sum of radius of the two balls.\\
+If a ball having a radius $r_1$ , moving with a velocity ($u_{x_1}$ , $u_{y_1}$ , $u_{z_1}$) at position ($x_1$ , $y_1$,$z_1$) collides with a ball having a radius $r_2$ , moving with a velocity ($u_{x_2} $ , $u_{y_2}$,$u_{y_2}$) at position ($x_2$ , $y_2$,$y_2$) , the number of iterations ( $ITER$) after which they will collide is given by the equation : \\
+\begin{equation}
+\Delta x = x_1 - x_2
+\end{equation}
+\begin{equation}
+\Delta y = y_1 - y_2
+\end{equation}
+\begin{equation}
+\Delta z = z_1 - z_2
+\end{equation}
+\begin{equation}
+\Delta u_x = u_{x_1} - u_{x_2}
+\end{equation}
+\begin{equation}
+\Delta u_y = u_{y_1} - u_{y_2}
+\end{equation}
+\begin{equation}
+\Delta u_z = u_{z_1} - u_{z_2}
+\end{equation}
+
+\begin{equation}
+\alpha = \Delta x\Delta u_x + \Delta y\Delta u_y +\Delta y\Delta u_y
+\end{equation}
+
+\begin{equation}
+\beta = \Delta u_x^2 + \Delta u_y^2 + \Delta u_z^2
+\end{equation}
+
+\begin{equation}
+distance = \Delta x^2 + \Delta y^2 +  \Delta z^2
+\end{equation}
+
+\begin{equation}
+ITER = \frac{-\alpha - \sqrt{\alpha^2 -(distance - (r_1 + r_2))\beta}}{\beta}
+\end{equation}
+
+Using this allows us to significantly improve the time complexity of the program. After the initial $\Theta(n^2)$ computations, the programs only does $\Theta(n)$ computations after every collision. With the time driven model, the program would have to do $\Theta(n^2)$ computations at every iteration.\\
+
+\textbf{(3) Ball-ball Collision : }\\
+A ball-ball collision is simply detected by popping the top element from the priority queue and the velocities are updated accordingly. The velocity of the balls are given by :
+
+\begin{equation}
+v_{x_1} = u_{x_1} - \frac{2r_2^3}{r_1^3 + r_2^3}\left[\frac{\Delta u_x\Delta x + \Delta u_y\Delta y\ + \Delta u_z\Delta z }{(r_1 + r_2)^2} \right]\Delta x
+\end{equation}
+\begin{equation}
+v_{y_1} = u_{y_1} - \frac{2r_2^3}{r_1^3 + r_2^3}\left[\frac{\Delta u_x\Delta x + \Delta u_y\Delta y\ + \Delta u_z\Delta z }{(r_1 + r_2)^2} \right]\Delta y
+\end{equation}
+\begin{equation}
+v_{z_1} = u_{z_1} - \frac{2r_2^3}{r_1^3 + r_2^3}\left[\frac{\Delta u_x\Delta x + \Delta u_y\Delta y\ + \Delta u_z\Delta z }{(r_1 + r_2)^2} \right]\Delta z
+\end{equation}
+\begin{equation}
+v_{x_2} = u_{x_2} + \frac{2r_1^3}{r_1^3 + r_2^3}\left[\frac{\Delta u_x\Delta x + \Delta u_y\Delta y\ + \Delta u_z\Delta z }{(r_1 + r_2)^2} \right]\Delta x
+\end{equation}
+\begin{equation}
+v_{y_2} = u_{y_2} + \frac{2r_1^3}{r_1^3 + r_2^3}\left[\frac{\Delta u_x\Delta x + \Delta u_y\Delta y\ + \Delta u_z\Delta z }{(r_1 + r_2)^2} \right]\Delta y
+\end{equation}
+\begin{equation}
+v_{z_2} = u_{z_2} + \frac{2r_1^3}{r_1^3 + r_2^3}\left[\frac{\Delta u_x\Delta x + \Delta u_y\Delta y\ + \Delta u_z\Delta z }{(r_1 + r_2)^2} \right]\Delta z
+\end{equation}
+
+After the collision, the priority queue is updated by just calculating the number of iterations for the collsion of every collision involving the balls involved in the collsion only.
+
+\subsection{Priority Queue}
+The priority queue stores the collison between all the balls according to the number of iterations after the start of the program, the collision would happen.\\ This allows us to update the priority queue after a collision between 2 balls or a ball and a wall and at that time too, we need to update the collision of the balls with just the balls involved in the collision. \\
+On pushing an element,along with iteration number of when the collision is going to happen, the last collision iteration number of both the balls is stored in the priority queue element as well as the iteration number of when the element is being pushed .\\
+On popping from the priority queue, the current last collision iteration number of the both the balls is compared with the iteration number of when the element was pushed in the priority queue and if it is greater, we ignore that element as the ball properties have been updated since that push.\\
+If the number is smaller, we send a message to the other ball requesting its data and we update the ball properties appropriately.
+
+\subsection{Messaging System}
+The threads communicate with each other through message passing. Each thread associated with a ball sends a message to every thread associated with every other ball requesting data. Each ball has a queue associated with it which stores the messages it has to reply to.  These queues are stored in a vector.
+
+\section{Testing Method}
+The various components were tested by : \\
+
+\textbf{GUI : } 
+\begin{description}
+\item[$\ast$ ] A black background which covered the full screen.
+\item[$\ast$ ] Implemented a balls using numerous points and filled it with color.
+\item[$\ast$ ] Displayed many balls at random positions ensuring that they do not occupy the same space initially.
+\item[$\ast$ ] Translated one ball along different directions at different speeds.
+\item[$\ast$ ] To ensure the rendering was smooth and frames weren't being missed, we removed the clear screen command to check it.
+\item[$\ast$ ]  Some of the problems of rendering faced were fixed by tweaking the timer function. 
+\item[$\ast$ ] Finally, we resized the screen while the program was running to ensure scaling was being done.
+\end{description}
+
+\textbf{Physics :} We started from the basics and kept on advancing to higher levels. This was done by specifying the initial position and motion of balls until a collision. The following was tested :
+\begin{description}
+\item[$\ast$ ] Translation of a ball , to see if the increments in x and y coordinates were uniform and display was able to render it in time for different speeds.
+\item[$\ast$ ] Perpendicular collision of a ball with a wall .  
+\item[$\ast$ ] Oblique collision of a ball with a wall .
+\item[$\ast$ ] Multiple balls were used and allowed to pass through each other to test the Ball-Wall collsions.
+\item[$\ast$ ] Head on collision of 2 balls. 
+\item[$\ast$ ] Oblique collision of 2 balls. 
+\item[$\ast$ ] Finally, we increased the number of balls to see if the program was able to react to all collisions between both ball-ball and ball-wall , especially the collisions which happened after a very short period of time.
+\end{description} 
+
+\textbf{Messaging System : }Data was sent to the vector containing message queues and checked to see if all the messages were getting delivered. The locking procedure was also checked in the same run to ensure a resource is not accessed by two threads at the same time.
+
+
+\section{Interaction Of Sub components}
+All the sub-components do their tasks independently and interact with each other to ensure the functioning of the screen saver. 
+\begin{description}
+\item[$\ast$ ] The Physics component calculates where to display each ball at every given amount of time and sends the data to the GUI component.
+\item[$\ast$ ] The Messaging system helps the Physics component by transmitting and communicating data between threads which is used to do all the calculations necessary.
+\item[$\ast$ ] The GUI receives all the data from the Physics component and displays it to the user. It also takes data from the user when varying the speed and uses the messaging system to interact with the Physics component. 
+\item[$\ast$ ] The UI receives all the data from the user and sends it to the physics or GUI for the implementation.
+\end{description}
+
+\section{Interaction Of Threads}
+
+\subsection{Model}
+One-to-one communication model has been used for the interaction of threads. It involves a message passing mailbox system. \\
+Each ball has a queue associated with it which stores these messages.
+\\Messages are of 7 types : \\
+\textbf{(1) Request : }Each ball sends a message to every other ball to request the data of the distance between them. \\
+A ball on receiving this message from its queue,  sends its data (containing its radius, velocity and position) to the associated ball.\\
+\textbf{(2) Response : }This message contains the data of another ball which was sent as a response to the \textbf{request message}. \\
+On receiving this message (containing the data) from its queue, the ball tests if the collision condition is true or not, and in case of a detection of a collision, it calculates the new velocity of both the balls associated with the collision and sends the new velocity of the other ball in a \textbf{collision message}. \\
+\textbf{(3) Collision : }This message informs the ball that its going to collide with another ball and it contains the new velocity of that ball.\\
+On receiving this message (containing the data) from its queue, the ball updates its velocity to the after collision velocity.\\
+\textbf{(4) Increase Velocity : }This message  updates the velocity of the ball and increases it by 10\% .  \\
+\textbf{(5) Decrease Velocity : }This message  updates the velocity of the ball and decreases it by 10\% \\
+\textbf{(6) 3D to 2D  Mode : }This message makes the Z-coordinate and the velocity along the Z-coordinate 0 enabling all the balls to move and stay in the Z-plane and this plane is projected in the 2D mode. \\
+\textbf{(7) 2D to 3D  Mode : }On moving from the 2D to the 3D mode, the balls are given random Z-velocities through this message.\\
+
+
+
+\subsection{Mechanism Of Synchronisation}
+\textbf{Mechanism Used : Mutex} \\
+To ensure that the various threads are able to communicate with each other effectively and not access the same resource together, \textbf{mutex} has been used . The mutex lock ensures that the mailbox(queue) associated with a ball isn't accessed by 2 balls ( threads) simultaneously. Therefore, the queue is locked while a thread is popping or pushing a message out of the mailbox. \\
+Mutex has been used instead of a semaphore as we require just one thread to be able to access a resource at a time to ensure synchronisation, and not multiple threads. Mutex has been used as we need to lock the resources for this case for just one thread and semaphore are usually used for waiting and signalling purposes. \\
+Mutex has been used in such a order to ensure that problems like deadlock and livelock do not happen.\\
+\section{Maintaining Various Ball Speeds}
+The ball speed is maintained by incrementing the x and y coordinates after a specific period of time. These increments are chosen randomly at the start of the program for each ball and is stored in the thread associated with each ball. After the start, the increments are changed accordingly with the collisions. The time period of the increments is the same for every ball which enables us to ignore the time part in the velocity and collision equations (eq.(1) - eq.(5)) .
+\end{document}
